@@ -1,0 +1,15 @@
+{
+  "name": "json-logic-to-sql-compiler",
+  "version": "1.0.0",
+  "description": "Compiles JSON Logic to SQL (highly opinionated for CMS Run Registry)",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "author": "Fabio Espinosa",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "ava": "^2.2.0"
+  }
+}
