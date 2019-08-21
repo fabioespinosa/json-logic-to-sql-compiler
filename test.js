@@ -96,6 +96,6 @@ test('json-logic-to-sequelize-querying with empty lumisection, should select *',
         .replace(/\s/g, '');
     t.deepEqual(
         select,
-        `SELECT"DatasetTripletCache".run_number,"DatasetTripletCache".name,*`
+        `SELECT"DatasetTripletCache".run_number,"DatasetTripletCache".name,"DatasetTripletCache".*`
     );
 });
