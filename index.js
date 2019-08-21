@@ -6,7 +6,7 @@ module.exports = json_input => {
 
         let select = parse_select(valid_json);
         if (select === '') {
-            select = `"DatasetTripletCache".*`;
+            throw 'No lumisection filter provided';
         } else {
             // Remove last trailing comma from select:
             select = select.substring(0, select.length - 3);
