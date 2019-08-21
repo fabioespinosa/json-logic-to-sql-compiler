@@ -5,8 +5,12 @@ module.exports = json_input => {
         const valid_json = JSON.parse(json_input);
 
         let select = parse_select(valid_json);
-        // Remove last trailing comma from select
-        select = select.substring(0, select.length - 3);
+        if (select === '') {
+            select = '*';
+        } else {
+            // Remove last trailing comma from select:
+            select = select.substring(0, select.length - 3);
+        }
         const filter = parse_filter(valid_json);
         const sql = `
     SELECT "DatasetTripletCache".run_number, "DatasetTripletCache".name, 
@@ -214,7 +218,7 @@ const parse_select = json => {
 
 const parse_and_select = array_of_expressions => {
     if (array_of_expressions.length === 1) {
-        return ` (${parse_select(array_of_expressions[0])}) `;
+        return `${parse_select(array_of_expressions[0])}`;
     } else {
         let generated_select = '';
         array_of_expressions.forEach((exp, index) => {

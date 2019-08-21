@@ -69,6 +69,33 @@ const json = `
 }
 `;
 
-test('json-logic-to-sequelize-querying working properly', t => {});
+test('json-logic-to-sequelize-querying with empty lumisection, should select *', t => {
+    const json = `
+    {
+        "and": [
+            {
+                "or": [
+                    {"==": [{"var": "dataset.name"}, "/PromptReco/Collisions2018A/DQM"]},
+                    {"==": [{"var": "dataset.name"}, "/PromptReco/Collisions2018B/DQM"]},
+                    {"==": [{"var": "dataset.name"}, "/PromptReco/Collisions2018C/DQM"]},
+                    {"==": [{"var": "dataset.name"}, "/PromptReco/Collisions2018D/DQM"]},
+                    {"==": [{"var": "dataset.name"}, "/PromptReco/Collisions2018E/DQM"]},
+                    {"==": [{"var": "dataset.name"}, "/PromptReco/Collisions2018F/DQM"]},
+                    {"==": [{"var": "dataset.name"}, "/PromptReco/Collisions2018G/DQM"]}
+                ]
+            }
+        ]
+    }
+    `;
 
-test('json-logic-to-sequelize-querying doing X', t => {});
+    const result = json_logic_to_sequelize_querying(json);
+    // Replace all empty space with a single space
+    const select = result
+        .split('FROM')[0]
+        .trim()
+        .replace(/\s/g, '');
+    t.deepEqual(
+        select,
+        `SELECT"DatasetTripletCache".run_number,"DatasetTripletCache".name,*`
+    );
+});
