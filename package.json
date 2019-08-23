@@ -1,6 +1,6 @@
 {
     "name": "json-logic-to-sql-compiler",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Compiles JSON Logic to SQL (highly opinionated for CMS Run Registry)",
     "main": "index.js",
     "scripts": {

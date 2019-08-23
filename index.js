@@ -106,19 +106,20 @@ const parse_operator = (operation, operator) => {
     }
 };
 
+// IN behaves (if the first argument is contained in the second argument, then it is true)
 const parse_in = array_of_in => {
     assert.ok(Array.isArray(array_of_in));
     assert.ok(array_of_in.length === 2);
     const [lhs, rhs] = array_of_in;
-    assert.ok(typeof lhs === 'object');
-    assert.ok(typeof lhs['var'] !== 'undefined');
-    assert.ok(Object.keys(lhs).length === 1);
-    assert.ok(typeof rhs === 'string');
-    const variable = lhs['var'];
+    assert.ok(typeof rhs === 'object');
+    assert.ok(typeof rhs['var'] !== 'undefined');
+    assert.ok(Object.keys(rhs).length === 1);
+    assert.ok(typeof lhs === 'string');
+    const variable = rhs['var'];
     // 'in' can only be used for run values, not lumisection:
     assert.ok(!variable.startsWith('lumisection'));
 
-    const like_value = `%${rhs}%`;
+    const like_value = `%${lhs}%`;
     return parse_variable({
         string: variable,
         value: like_value,
