@@ -26,6 +26,7 @@ module.exports = json_input => {
 
         ${filter}
         `;
+        console.log(sql);
         return sql;
     } catch (err) {
         console.log('Unvalid JSON');
@@ -276,5 +277,5 @@ const parse_lumisectionvalue_select = ({ level2, level3, value }) => {
     };
 
     const column_select = oms_rr_conversion_ranges[level2];
-    return `"DatasetTripletCache"."${column_select}" #>> '{${level3}, ${value}}' AS "${level3}" ,\n`;
+    return `COALESCE("DatasetTripletCache"."${column_select}" #>> '{${level3}, ${value}}', '[]') AS "${level3}" ,\n`;
 };
