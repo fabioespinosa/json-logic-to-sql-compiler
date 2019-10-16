@@ -178,8 +178,11 @@ const parse_variable = ({ string, value, operator }) => {
             sql = parse_datasetvalue({ level2, level3 });
             break;
         case 'run':
-            assert.ok(elements.length === 3);
-            sql = parse_runvalue({ level2, level3 });
+            if (level2 === 'run_number') {
+                sql = `"Run"."run_number"`;
+            } else {
+                sql = parse_runvalue({ level2, level3 });
+            }
             break;
         case 'lumisection':
             assert.ok(elements.length === 3);
