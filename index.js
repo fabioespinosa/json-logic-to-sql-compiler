@@ -26,7 +26,10 @@ module.exports = json_input => {
 
         ${filter}
         `;
-        console.log(sql);
+        if (process.env.NODE_ENV === 'development') {
+            console.log('Output:');
+            console.log(sql);
+        }
         return sql;
     } catch (err) {
         console.log('Unvalid JSON');
