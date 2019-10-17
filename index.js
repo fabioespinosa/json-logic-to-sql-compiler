@@ -6,7 +6,7 @@ module.exports = json_input => {
 
         let select = parse_select(valid_json);
         if (select === '') {
-            throw 'No lumisection filter provided';
+            select = `COALESCE("DatasetTripletCache"."dcs_ranges" #>> '{"all_lumisections", "TRUE"}', '[]') AS "all_lumisections"`;
         } else {
             // Remove last trailing comma from select:
             select = select.substring(0, select.length - 3);
