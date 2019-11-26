@@ -256,6 +256,9 @@ const parse_operator_select = (operation, operator) => {
                     level3,
                     value: rhs
                 });
+            } else {
+                // If it is not a lumisection value, it should not be included in select:
+                return '';
             }
         } else {
             if (typeof rhs !== 'object') {
